@@ -1,8 +1,8 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { useState } from "react";
 import Game from "./Game";
 
+//the start screen at the start
 function App() {
   const [gameStarted, setGameStarted] = useState(false);
 
@@ -12,8 +12,14 @@ function App() {
         <Game />
       ) : (
         <>
-          <p>Welcome to climate simulator currently in testing</p>
-          <button type="button" onClick={() => setGameStarted(true)}>
+          <p className="startText">
+            Welcome to climate simulator currently in testing
+          </p>
+          <button
+            className="startButtonTag"
+            type="button"
+            onClick={() => setGameStarted(true)}
+          >
             Start Game
           </button>
         </>

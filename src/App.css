@@ -1,5 +1,19 @@
 .content {
   padding: 0 1em;
-  border: 5mm blue dashed;
-  border-style: solid;
+  border: 2mm blue dashed;
+  border-style: dashed;
+}
+
+.button1{
+  padding: 0 2em;
+  border: 1mm dashed;
+  border-style: double;
+
+}
+
+.button2{
+  padding: 0 2em;
+  border: 1mm dashed;
+  border-style: double;
+
 }
