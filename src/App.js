@@ -5,16 +5,20 @@ import Game from "./Game";
 
 function App() {
   const [gameStarted, setGameStarted] = useState(false);
-  
-  return gameStarted ? (
-    <Game />
-  ) : (
-    <>
-      <p>Welcome to climate simulator currently in testing</p>
-      <button type="button" onClick={() => setGameStarted(true)}>
-        Start Game
-      </button>
-    </>
+
+  return (
+    <div className="content">
+      {gameStarted ? (
+        <Game />
+      ) : (
+        <>
+          <p>Welcome to climate simulator currently in testing</p>
+          <button type="button" onClick={() => setGameStarted(true)}>
+            Start Game
+          </button>
+        </>
+      )}
+    </div>
   );
 }
 
