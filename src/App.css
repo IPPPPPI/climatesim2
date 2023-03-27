@@ -8,10 +8,47 @@
   padding: 0 2em;
   border: 1mm dashed;
   border-style: double;
+  color: red;
 
 }
 
+.solarTTB{
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.solarTT{
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+ 
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+}
+
+.button1:hover .solarTT{
+  visibility: visible;
+}
+
 .button2{
+  padding: 0 2em;
+  border: 1mm dashed;
+  border-style: double;
+
+}
+.button3{
+  padding: 0 2em;
+  border: 1mm dashed;
+  border-style: double;
+
+}
+.button4{
   padding: 0 2em;
   border: 1mm dashed;
   border-style: double;
