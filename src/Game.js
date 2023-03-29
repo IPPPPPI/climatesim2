@@ -9,9 +9,9 @@ const events = {
     nuclear: "nuclear_invest",
     hydro: "hydro_invest",
     wind: "wind_invest",
-    back: "go_back",
   },
   solar_invest: {
+    description: "Money 30000 ",
     solar: "solar_invested",
   },
   nuclear_invest: {
@@ -24,31 +24,32 @@ const events = {
     wind: "wind_invested",
   },
   solar_invested: {
+    description: "Money 30000 ",
     statsChanges: {
-      money: -20000,
-      happiness: 5,
-      environment: 3,
+      money: -30000,
+      happiness: 10,
+      environment: 2,
     },
   },
   nuclear_invested: {
     statsChanges: {
-      money: -10000,
-      happiness: 5,
-      environment: 3,
+      money: -40000,
+      happiness: -10,
+      environment: 10,
     },
   },
   hydro_invested: {
     statsChanges: {
-      money: 20000,
-      happiness: 5,
+      money: -20000,
+      happiness: 8,
       environment: 3,
     },
   },
   wind_invested: {
     statsChanges: {
-      money: 40000,
+      money: -10000,
       happiness: 5,
-      environment: 3,
+      environment: 4,
     },
   },
 };
@@ -78,6 +79,25 @@ const useStore = create((set, get) => ({
   happiness: 100,
   environment: 50,
   event: "initial",
+  goBackwards: () => {
+    set(
+      produce((state) => {
+        let done = false;
+        for (let eventKey in events) {
+          const event = events[eventKey];
+          for (let nodeKey in event) {
+            const node = event[nodeKey];
+            if (node === state.event) {
+              state.event = eventKey;
+              done = true;
+            }
+            break;
+          }
+          if (done) break;
+        }
+      })
+    );
+  },
   setEvent: (event) => {
     set(
       produce((state) => {
@@ -93,8 +113,15 @@ const useStore = create((set, get) => ({
 
 //the display of screen
 export default function Game() {
-  const { money, population, happiness, environment, event, setEvent } =
-    useStore();
+  const {
+    money,
+    population,
+    happiness,
+    environment,
+    event,
+    goBackwards,
+    setEvent,
+  } = useStore();
   const eventData = events[event];
   return (
     <>
@@ -103,8 +130,25 @@ export default function Game() {
       <p>Happiness level: {happiness}</p>
       <p>Money: ${money}</p>
       <p>Population: {population} people</p>
-      <p>Environment: {environment} level</p>
-      {eventData.solar && (
+      <p>Environment: {environment}</p>
+
+      <button className="backButton" onClick={() => goBackwards()}>
+        Go Back
+      </button>
+      {Object.entries(eventData).map(([key, value]) => {
+        return (
+          eventData[key] && (
+            <button
+              className="button1"
+              onClick={() => setEvent(eventData[key])}
+            >
+              {key[0].toUpperCase() + key.slice(1).toLowerCase()} Power
+              <div className={`${key}TT`}>{`${events.description}`}</div>
+            </button>
+          )
+        );
+      })}
+      {/* {eventData.solar && (
         <button
           className="button1"
           type="button"
@@ -112,7 +156,7 @@ export default function Game() {
         >
           Solar Power
           <div className="solarTTB">
-            <span className="solarTT">Money -200</span>
+            <span className="solarTT">Money -20000</span>
           </div>
         </button>
       )}
@@ -122,7 +166,10 @@ export default function Game() {
           type="button"
           onClick={() => setEvent(eventData.nuclear)}
         >
-          Wind power
+          Nuclear power
+          <div className="nuclearTTB">
+            <span className="nuclearTT">Money -40000</span>
+          </div>
         </button>
       )}
       {eventData.hydro && (
@@ -142,7 +189,7 @@ export default function Game() {
         >
           Wind power
         </button>
-      )}
+      )} */}
     </>
   );
 }

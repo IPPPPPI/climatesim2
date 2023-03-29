@@ -5,7 +5,6 @@ import Game from "./Game";
 //the start screen at the start
 function App() {
   const [gameStarted, setGameStarted] = useState(false);
-
   return (
     <div className="content">
       {gameStarted ? (
@@ -27,5 +26,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

@@ -22,6 +22,26 @@
   visibility: hidden;
   width: 120px;
   background-color: black;
+  color: white;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+ 
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+}
+
+.nuclearTTB{
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.nuclearTT{
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
   color: #fff;
   text-align: center;
   padding: 5px 0;
@@ -32,25 +52,60 @@
   z-index: 1;
 }
 
+.hydroTTB{
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.hydroTT{
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+ 
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+}
+
+.windTTB{
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.windTT{
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+ 
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+}
+
+
+
 .button1:hover .solarTT{
   visibility: visible;
 }
 
-.button2{
-  padding: 0 2em;
-  border: 1mm dashed;
-  border-style: double;
-
+.button1:hover .nuclearTT{
+  visibility: visible;
 }
-.button3{
-  padding: 0 2em;
-  border: 1mm dashed;
-  border-style: double;
 
+.button1:hover .hydroTT{
+  visibility: visible;
 }
-.button4{
-  padding: 0 2em;
-  border: 1mm dashed;
-  border-style: double;
 
+.button1:hover .windTT{
+  visibility: visible;
 }
