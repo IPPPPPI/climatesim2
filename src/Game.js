@@ -11,7 +11,7 @@ const events = {
     wind: "wind_invest",
   },
   solar_invest: {
-    description: "Money 30000 ",
+    description: "Money -30000 Happiness +10 Environment +2",
     solar: "solar_invested",
   },
   nuclear_invest: {
@@ -24,7 +24,6 @@ const events = {
     wind: "wind_invested",
   },
   solar_invested: {
-    description: "Money 30000 ",
     statsChanges: {
       money: -30000,
       happiness: 10,
@@ -51,6 +50,12 @@ const events = {
       happiness: 5,
       environment: 4,
     },
+  },
+};
+
+const descriptions = {
+  solar_description: {
+    description: "Money -30000 Happiness +10 Environment +2",
   },
 };
 
@@ -122,74 +127,78 @@ export default function Game() {
     goBackwards,
     setEvent,
   } = useStore();
+
   const eventData = events[event];
   return (
-    <>
-      <br></br>
-      <p>Resources</p>
-      <p>Happiness level: {happiness}</p>
-      <p>Money: ${money}</p>
-      <p>Population: {population} people</p>
-      <p>Environment: {environment}</p>
-
-      <button className="backButton" onClick={() => goBackwards()}>
-        Go Back
-      </button>
-      {Object.entries(eventData).map(([key, value]) => {
-        return (
-          eventData[key] && (
-            <button
-              className="button1"
-              onClick={() => setEvent(eventData[key])}
-            >
-              {key[0].toUpperCase() + key.slice(1).toLowerCase()} Power
-              <div className={`${key}TT`}>{`${events.description}`}</div>
-            </button>
-          )
-        );
-      })}
-      {/* {eventData.solar && (
-        <button
-          className="button1"
-          type="button"
-          onClick={() => setEvent(eventData.solar)}
-        >
-          Solar Power
-          <div className="solarTTB">
-            <span className="solarTT">Money -20000</span>
-          </div>
+    console.log(descriptions.solar_description.description),
+    (
+      <>
+        <br></br>
+        <p>Resources</p>
+        <p>Happiness level: {happiness}</p>
+        <p>Money: ${money}</p>
+        <p>Population: {population} people</p>
+        <p>Environment: {environment}</p>
+        <button className="backButton" onClick={() => goBackwards()}>
+          Go Back
         </button>
-      )}
-      {eventData.nuclear && (
-        <button
-          className="button2"
-          type="button"
-          onClick={() => setEvent(eventData.nuclear)}
-        >
-          Nuclear power
-          <div className="nuclearTTB">
-            <span className="nuclearTT">Money -40000</span>
-          </div>
-        </button>
-      )}
-      {eventData.hydro && (
-        <button
-          className="button3"
-          type="button"
-          onClick={() => setEvent(eventData.hydro)}
-        >
-          Hydro power
-        </button>
-      )}
-      {eventData.wind && (
-        <button
-          className="button4"
-          type="button"
-          onClick={() => setEvent(eventData.wind)}
-        >
-          Wind power
-        </button>
-      )} */}
-    </>
+        {eventData.solar && (
+          <button
+            className="button1"
+            type="button"
+            onClick={() => setEvent(eventData.solar)}
+          >
+            Solar Power
+            <div className="solarTTB">
+              <span className="solarTT">Money -200</span>
+            </div>
+          </button>
+        )}
+        {eventData.nuclear && (
+          <button
+            className="button2"
+            type="button"
+            onClick={() => setEvent(eventData.nuclear)}
+          >
+            Wind power
+          </button>
+        )}
+        {eventData.hydro && (
+          <button
+            className="button3"
+            type="button"
+            onClick={() => setEvent(eventData.hydro)}
+          >
+            Hydro power
+          </button>
+        )}
+        {eventData.wind && (
+          <button
+            className="button4"
+            type="button"
+            onClick={() => setEvent(eventData.wind)}
+          >
+            Wind power
+          </button>
+        )}
+        \*
+        {Object.entries(eventData).map(([key, value]) => {
+          return (
+            eventData[key] && (
+              <button
+                className="button1"
+                onClick={() => setEvent(eventData[key])}
+              >
+                {key[0].toUpperCase() + key.slice(1).toLowerCase()} Power
+                <div className={`${key}TT`}>{`${
+                  events[eventData[key]]?.description
+                }`}</div>
+              </button>
+            )
+          );
+        })}
+        */
+      </>
+    )
   );
 }
