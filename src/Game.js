@@ -3,202 +3,36 @@ import { create } from "zustand";
 import "./App.css";
 
 //events for the games that will run down
-const events = {
-  initial: {
-    solar: "solar_invest",
-    nuclear: "nuclear_invest",
-    hydro: "hydro_invest",
-    wind: "wind_invest",
-  },
-  solar_invest: {
-    description: "Money -30000 Happiness +10 Environment +2",
-    solar: "solar_invested",
-  },
-  nuclear_invest: {
-    nuclear: "nuclear_invested",
-  },
-  hydro_invest: {
-    hydro: "hydro_invested",
-  },
-  wind_invest: {
-    wind: "wind_invested",
-  },
-  solar_invested: {
-    statsChanges: {
-      money: -30000,
-      happiness: 10,
-      environment: 2,
-    },
-  },
-  nuclear_invested: {
-    statsChanges: {
-      money: -40000,
-      happiness: -10,
-      environment: 10,
-    },
-  },
-  hydro_invested: {
-    statsChanges: {
-      money: -20000,
-      happiness: 8,
-      environment: 3,
-    },
-  },
-  wind_invested: {
-    statsChanges: {
-      money: -10000,
-      happiness: 5,
-      environment: 4,
-    },
-  },
-};
+const money = 500000;
+const population = 100000;
+const happiness = 100;
+const environment = 100;
+const populationchange = 0;
+const moneychange = 0;
+const environmentchange = 0;
+const happinesschange = 0;
+let year = 2000;
 
-const descriptions = {
-  solar_description: {
-    description: "Money -30000 Happiness +10 Environment +2",
-  },
-};
-
-/*
-const nodes = {
-  initial: {
-
-  },
-  initial1: {
-    parent: "initial",
-    cost: {
-      money: 20
-    }
-  },
-  initial2: {
-    parent: "initial",
-    cost: {}
-  }
-}
-*/
-
-//checks the events above to see what valiue it need to change (Special thanks to Mr.Pig)
-const useStore = create((set, get) => ({
-  money: 100000,
-  population: 10000,
-  happiness: 100,
-  environment: 50,
-  event: "initial",
-  goBackwards: () => {
-    set(
-      produce((state) => {
-        let done = false;
-        for (let eventKey in events) {
-          const event = events[eventKey];
-          for (let nodeKey in event) {
-            const node = event[nodeKey];
-            if (node === state.event) {
-              state.event = eventKey;
-              done = true;
-            }
-            break;
-          }
-          if (done) break;
-        }
-      })
-    );
-  },
-  setEvent: (event) => {
-    set(
-      produce((state) => {
-        state.event = event;
-        if (events[event].statsChanges)
-          Object.entries(events[event].statsChanges).forEach(([key, value]) => {
-            state[key] += value;
-          });
-      })
-    );
-  },
-}));
-
-//the display of screen
 export default function Game() {
-  const {
-    money,
-    population,
-    happiness,
-    environment,
-    event,
-    goBackwards,
-    setEvent,
-  } = useStore();
-
-  const eventData = events[event];
   return (
-    console.log(descriptions.solar_description.description),
-    (
-      <>
-        <br></br>
-        <p>Resources</p>
-        <p>Happiness level: {happiness}</p>
-        <p>Money: ${money}</p>
-        <p>Population: {population} people</p>
-        <p>Environment: {environment}</p>
-        <button className="backButton" onClick={() => goBackwards()}>
-          Go Back
-        </button>
-        {eventData.solar && (
-          <button
-            className="button1"
-            type="button"
-            onClick={() => setEvent(eventData.solar)}
-          >
-            Solar Power
-            <div className="solarTTB">
-              <span className="solarTT">Money -200</span>
-            </div>
-          </button>
-        )}
-        {eventData.nuclear && (
-          <button
-            className="button2"
-            type="button"
-            onClick={() => setEvent(eventData.nuclear)}
-          >
-            Wind power
-          </button>
-        )}
-        {eventData.hydro && (
-          <button
-            className="button3"
-            type="button"
-            onClick={() => setEvent(eventData.hydro)}
-          >
-            Hydro power
-          </button>
-        )}
-        {eventData.wind && (
-          <button
-            className="button4"
-            type="button"
-            onClick={() => setEvent(eventData.wind)}
-          >
-            Wind power
-          </button>
-        )}
-        \*
-        {Object.entries(eventData).map(([key, value]) => {
-          return (
-            eventData[key] && (
-              <button
-                className="button1"
-                onClick={() => setEvent(eventData[key])}
-              >
-                {key[0].toUpperCase() + key.slice(1).toLowerCase()} Power
-                <div className={`${key}TT`}>{`${
-                  events[eventData[key]]?.description
-                }`}</div>
-              </button>
-            )
-          );
-        })}
-        */
-      </>
-    )
+    <>
+      <div className="statbox">
+        <div className="catbox">
+          <p>Population: {population}</p>
+        </div>
+        <div className="catbox">
+          <p>${money}</p>
+        </div>
+        <div className="catbox">
+          <p>Environment: {environment}</p>
+        </div>
+        <div className="catbox">
+          <p>Happiness: {happiness}</p>
+        </div>
+        <div className="catbox">
+          <p>Year: {year}</p>
+        </div>
+      </div>
+    </>
   );
 }
