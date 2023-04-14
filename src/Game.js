@@ -1,53 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 // Define the data model
 const technologyTreeData = [
   {
-    id: '1',
-    name: 'Technology 1',
-    cost: 100,
+    id: "1",
+    name: "Technology 1",
     effects: {
       population: 10,
       happiness: 5,
       environment: -5,
       money: -50,
+      year: 5,
     },
     children: [
       {
-        id: '2',
-        name: 'Technology 2',
-        cost: 200,
+        id: "2",
+        name: "Technology 2",
         effects: {
           population: 20,
           happiness: 10,
           environment: -10,
           money: -100,
+          year: 3,
         },
         children: [],
       },
       {
-        id: '3',
-        name: 'Technology 3',
-        cost: 300,
+        id: "3",
+        name: "Technology 3",
         effects: {
           population: 30,
           happiness: 15,
           environment: -15,
           money: -150,
+          year: 2,
         },
         children: [],
       },
     ],
   },
   {
-    id: '4',
-    name: 'Technology 4',
-    cost: 500,
+    id: "4",
+    name: "Technology 4",
     effects: {
       population: 50,
       happiness: 25,
       environment: -25,
       money: -250,
+      year: -5,
     },
     children: [],
   },
@@ -81,9 +81,11 @@ const TechnologyNode = ({ node, onClick }) => {
   return (
     <div>
       <h3>{node.name}</h3>
-      <p>Cost: {node.cost}</p>
-      <button onClick={handleClick} disabled={researched}>
+      <button className="tooltip" onClick={handleClick}>
         {researched ? "Researched" : "Research"}
+        <span className="tooltiptext">
+          Effects: {JSON.stringify(node.effects)}
+        </span>
       </button>
       {node.children.map((child) => (
         <TechnologyNode key={child.id} node={child} onClick={onClick} />
@@ -119,7 +121,7 @@ const App = () => {
   const handleNodeClick = (effects) => {
     setStats((prevState) => {
       return {
-        year: prevState.year + 1,
+        year: prevState.year + effects.year,
         population: prevState.population + effects.population,
         happiness: prevState.happiness + effects.happiness,
         environment: prevState.environment + effects.environment,
