@@ -4,7 +4,7 @@ import React, { useState } from "react";
 const technologyTreeData = [
   {
     id: "1",
-    name: "Technology 1",
+    name: "Eletric cars",
     effects: {
       population: 10,
       happiness: 5,
@@ -15,7 +15,7 @@ const technologyTreeData = [
     children: [
       {
         id: "2",
-        name: "Technology 2",
+        name: "Electricity",
         effects: {
           population: 20,
           happiness: 10,
@@ -27,7 +27,7 @@ const technologyTreeData = [
       },
       {
         id: "3",
-        name: "Technology 3",
+        name: "Battery",
         effects: {
           population: 30,
           happiness: 15,
@@ -41,15 +41,41 @@ const technologyTreeData = [
   },
   {
     id: "4",
-    name: "Technology 4",
+    name: "Nuclear Power",
     effects: {
-      population: 50,
-      happiness: 25,
-      environment: -25,
-      money: -250,
-      year: -5,
+      population: 0,
+      happiness: -25,
+      environment: 35,
+      money: -1000,
+      year: 20,
     },
-    children: [],
+    children: [
+      {
+        id: "11",
+        name: "Uranium refining",
+        effects: {
+          population: -50,
+          happiness: 25,
+          environment: -25,
+          money: -250,
+          year: 5,
+        },
+        children: [
+          {
+            id: "12",
+            name: "Basic Industry",
+            effects: {
+              population: 50,
+              happiness: 25,
+              environment: -25,
+              money: -250,
+              year: 1,
+            },
+            children: [],
+          },
+        ],
+      },
+    ],
   },
 ];
 
@@ -67,15 +93,28 @@ const Stats = ({ year, population, happiness, environment, money }) => {
   );
 };
 
-// Define the TechnologyNode component
+//Check the user's prerequisite research requirement and confirms if the user has already research it
+//example:blocks user from research eletric car without battery
 const TechnologyNode = ({ node, onClick }) => {
-  const [researched, setResearched] = useState(false);
+  const [researched, setResearched] = useState(node.researched);
 
   const handleClick = () => {
-    if (!researched) {
+    if (canResearch(node)) {
       onClick(node.effects);
       setResearched(true);
+      node.researched = true;
+    } else {
+      alert("You must research all prerequisites first!");
     }
+  };
+
+  const canResearch = (node) => {
+    if (node.children.length === 0) {
+      return true;
+    }
+    return node.children.every((child) => {
+      return child.researched;
+    });
   };
 
   return (
@@ -84,7 +123,10 @@ const TechnologyNode = ({ node, onClick }) => {
       <button className="tooltip" onClick={handleClick}>
         {researched ? "Researched" : "Research"}
         <span className="tooltiptext">
-          Effects: {JSON.stringify(node.effects)}
+          Effects:{" "}
+          {Object.entries(node.effects)
+            .map(([key, value]) => `${key}: ${value}`)
+            .join(", ")}
         </span>
       </button>
       {node.children.map((child) => (
