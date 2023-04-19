@@ -123,7 +123,7 @@ const TechnologyNode = ({ node, onClick }) => {
       <button className="tooltip" onClick={handleClick}>
         {researched ? "Researched" : "Research"}
         <span className="tooltiptext">
-          Effects:{" "}
+          Cost:{" "}
           {Object.entries(node.effects)
             .map(([key, value]) => `${key}: ${value}`)
             .join(", ")}
@@ -148,7 +148,6 @@ const TechnologyTree = ({ treeData, onClick }) => {
   );
 };
 
-// Define the App component
 const App = () => {
   // Initialize the stats state
   const [stats, setStats] = useState({
@@ -172,6 +171,29 @@ const App = () => {
     });
   };
 
+  // Define the GameOver component
+  const GameOver = () => {
+    return (
+      <div>
+        <h1>Game Over</h1>
+        <p>Your stats have reached zero. Please try again.</p>
+      </div>
+    );
+  };
+
+  // Check if any stat has reached zero and render the GameOver component if true
+  // year limit is set to 100 year starting from 2000
+  if (
+    stats.year >= 2100 ||
+    stats.population <= 0 ||
+    stats.happiness <= 0 ||
+    stats.environment <= 0 ||
+    stats.money <= 0
+  ) {
+    return <GameOver />;
+  }
+
+  // Render the TechnologyTree and Stats components if the game is not over
   return (
     <div>
       <TechnologyTree treeData={technologyTreeData} onClick={handleNodeClick} />
