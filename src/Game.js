@@ -92,7 +92,18 @@ const technologyTreeData = [
 ];
 
 // Define the Stats component
-const Stats = ({ year, population, happiness, environment, money }) => {
+const Stats = ({
+  year,
+  population,
+  happiness,
+  environment,
+  money,
+  yeargrowth,
+  populationgrowth,
+  happinessgrowth,
+  environmentgrowth,
+  moneygrowth,
+}) => {
   return (
     <div className="statDisplay">
       <h2>Stats</h2>
@@ -101,6 +112,11 @@ const Stats = ({ year, population, happiness, environment, money }) => {
       <p>Happiness: {happiness}</p>
       <p>Environment: {environment}</p>
       <p>Money: {money}</p>
+      <p>Year Growth: {yeargrowth}</p>
+      <p>Population Growth: {populationgrowth}</p>
+      <p>Happiness Growth: {happinessgrowth}</p>
+      <p>Environment Growth: {environmentgrowth}</p>
+      <p>Money Growth: {moneygrowth}</p>
     </div>
   );
 };
@@ -168,6 +184,11 @@ const App = () => {
     happiness: 50,
     environment: 50,
     money: 500,
+    moneygrowth: 250,
+    happinessgrowth: 25,
+    environmentgrowth: 25,
+    yeargrowth: 1,
+    populationgrowth: 50,
   });
   // Define the onClick function
   const handleNodeClick = (effects) => {
@@ -178,6 +199,28 @@ const App = () => {
         happiness: prevState.happiness + effects.happiness,
         environment: prevState.environment + effects.environment,
         money: prevState.money + effects.money,
+        yeargrowth: stats.yeargrowth,
+        populationgrowth: stats.populationgrowth,
+        moneygrowth: stats.moneygrowth,
+        happinessgrowth: stats.happinessgrowth,
+        environmentgrowth: stats.environmentgrowth,
+      };
+    });
+  };
+
+  const yearClick = () => {
+    setStats((prevState) => {
+      return {
+        year: prevState.year + stats.yeargrowth,
+        population: prevState.population + stats.populationgrowth,
+        happiness: prevState.happiness + stats.happinessgrowth,
+        environment: prevState.environment + stats.environmentgrowth,
+        money: prevState.money + stats.moneygrowth,
+        yeargrowth: stats.yeargrowth,
+        populationgrowth: stats.populationgrowth,
+        moneygrowth: stats.moneygrowth,
+        happinessgrowth: stats.happinessgrowth,
+        environmentgrowth: stats.environmentgrowth,
       };
     });
   };
@@ -210,6 +253,7 @@ const App = () => {
       <Stats {...stats} />
       <img src={image} alt=""></img>
       <TechnologyTree treeData={technologyTreeData} onClick={handleNodeClick} />
+      <button onClick={yearClick}>Next Year</button>
     </>
   );
 };
