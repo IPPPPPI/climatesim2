@@ -2,6 +2,7 @@
   padding: 0 1em;
   border: 2mm blue dashed;
   border-style: dashed;
+  display:flex;
 }
 
 .tooltip {
@@ -21,7 +22,7 @@
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 1000px;
+  width: 140px;
   background-color: black;
   color: #fff;
   text-align: center;
@@ -45,5 +46,21 @@
   border-width: 5px;
   border-style: solid;
   border-color: black transparent transparent transparent;
+}
+
+.screen{
+  display: flex;
+  flex-direction: row;
+  margin:20px;
+}
+
+
+
+.statDisplay{
+  display:flex;
+  flex-direction:column;
+  margin:100px;
+  margin-right: auto;
+
 }
 

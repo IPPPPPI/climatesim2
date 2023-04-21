@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import image from "./org_cat.png";
 // Define the data model
 const technologyTreeData = [
   {
@@ -51,7 +51,7 @@ const technologyTreeData = [
     },
     children: [
       {
-        id: "11",
+        id: "5",
         name: "Uranium refining",
         effects: {
           population: -50,
@@ -62,7 +62,19 @@ const technologyTreeData = [
         },
         children: [
           {
-            id: "12",
+            id: "6",
+            name: "Industrial Mining",
+            effects: {
+              population: 50,
+              happiness: 25,
+              environment: -25,
+              money: -250,
+              year: 1,
+            },
+            children: [],
+          },
+          {
+            id: "7",
             name: "Basic Industry",
             effects: {
               population: 50,
@@ -82,7 +94,7 @@ const technologyTreeData = [
 // Define the Stats component
 const Stats = ({ year, population, happiness, environment, money }) => {
   return (
-    <div>
+    <div className="statDisplay">
       <h2>Stats</h2>
       <p>Year: {year}</p>
       <p>Population: {population}</p>
@@ -119,7 +131,7 @@ const TechnologyNode = ({ node, onClick }) => {
 
   return (
     <div>
-      <h3>{node.name}</h3>
+      <p>{node.name}</p>
       <button className="tooltip" onClick={handleClick}>
         {researched ? "Researched" : "Research"}
         <span className="tooltiptext">
@@ -139,7 +151,7 @@ const TechnologyNode = ({ node, onClick }) => {
 // Define the TechnologyTree component
 const TechnologyTree = ({ treeData, onClick }) => {
   return (
-    <div>
+    <div className="screen">
       <h1>Technology Tree</h1>
       {treeData.map((node) => (
         <TechnologyNode key={node.id} node={node} onClick={onClick} />
@@ -157,7 +169,6 @@ const App = () => {
     environment: 50,
     money: 500,
   });
-
   // Define the onClick function
   const handleNodeClick = (effects) => {
     setStats((prevState) => {
@@ -195,10 +206,11 @@ const App = () => {
 
   // Render the TechnologyTree and Stats components if the game is not over
   return (
-    <div>
-      <TechnologyTree treeData={technologyTreeData} onClick={handleNodeClick} />
+    <>
       <Stats {...stats} />
-    </div>
+      <img src={image} alt=""></img>
+      <TechnologyTree treeData={technologyTreeData} onClick={handleNodeClick} />
+    </>
   );
 };
 
