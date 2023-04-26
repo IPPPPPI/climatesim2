@@ -12,7 +12,8 @@ function App() {
       ) : (
         <>
           <p className="startText">
-            Welcome to climate simulator currently in testing
+            Welcome to climate simulator, you are the elector mayor of Oaktown.
+            Its up to you to save this town from its problems
           </p>
           <button
             className="startButtonTag"
