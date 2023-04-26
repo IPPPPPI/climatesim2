@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/climatesim2/static/css/main.a7b87eef.css",
+    "main.js": "/climatesim2/static/js/main.f541a1a9.js",
+    "static/js/787.28cb0dcd.chunk.js": "/climatesim2/static/js/787.28cb0dcd.chunk.js",
+    "static/media/org_cat.png": "/climatesim2/static/media/org_cat.8ff07fd6b577dd9d9469.png",
+    "index.html": "/climatesim2/index.html",
+    "main.a7b87eef.css.map": "/climatesim2/static/css/main.a7b87eef.css.map",
+    "main.f541a1a9.js.map": "/climatesim2/static/js/main.f541a1a9.js.map",
+    "787.28cb0dcd.chunk.js.map": "/climatesim2/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a7b87eef.css",
+    "static/js/main.f541a1a9.js"
+  ]
+}
